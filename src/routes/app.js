@@ -1,0 +1,61 @@
+import { FOR_ALL, GUEST_ONLY, USER_ONLY } from './route.type';
+
+const applinks = [{
+   name: 'home',
+   path: '/',
+   view: 'Home',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [{
+         key: 'main', show: FOR_ALL, order: 0
+      }],
+      icon: 'mdi-home',
+      title: '首頁'
+   } 
+}];
+
+const userLinks = [];
+
+const guestLinks = [{
+   name: 'test',
+   path: '/test',
+   view: 'Test',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Test'
+   } 
+},{
+   name: 'marker',
+   path: '/marker',
+   view: 'Marker',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Marker'
+   } 
+},{
+   name: 'import',
+   path: '/import',
+   view: 'Import',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Import'
+   } 
+}];
+
+let appRoutes = applinks.concat(userLinks).concat(guestLinks);
+
+for(let i = 0; i < appRoutes.length; i++){
+   appRoutes[i].meta.order = i;
+}
+
+export default appRoutes;
