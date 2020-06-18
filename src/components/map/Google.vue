@@ -1,5 +1,5 @@
 <template>
-   <div :id="id" :style="style">
+   <div :id="id" :style="containerStyle">
 
    </div>
 </template>
@@ -29,15 +29,15 @@ export default {
          type: String,
          default: ''
       },
+      libraries: {
+         type: Array,
+         default: null
+      },
+      styles: {
+         type: Array,
+         default: null
+      },
       import_marker_cluster: {
-         type: Boolean,
-         default: true
-      },
-      import_geometry: {
-         type: Boolean,
-         default: false
-      },
-      import_places: {
          type: Boolean,
          default: false
       },
@@ -76,16 +76,11 @@ export default {
          placesService: null,
 
          mapGoogleGeometryMultiPoly: null,
-         mapNumGeometries: 0,
-
-         styles: {
-            default: null,
-            hide: []
-         }
+         mapNumGeometries: 0
       }
    },
    computed: {
-      style() {
+      containerStyle() {
          return {
             width: '100%',
             height: `${this.height}px`
@@ -93,17 +88,13 @@ export default {
       }
    },
    beforeMount() {
-      if(this.hide_business) {
-         this.styles.hide.push({
-            featureType: 'poi.business',
-            stylers: [{ visibility: 'off' }]
-         });
-      }
+      
       if(this.center && this.center.length === 2) {
          let lat = tryParseInt(this.center[0]);
          let lng = tryParseInt(this.center[1]);
          if(isValidLatitude(lat) && isValidLongitude(lng)) {
-            this.settings.center = new google.maps.LatLng(lat, lng);
+            this.settings.center.lat = lat;
+            this.settings.center.lng = lng;
          }
       }
 
@@ -117,10 +108,9 @@ export default {
       };
       if(this.language) params.language = this.language;
 
-      let libraries = [];
-      if(this.import_geometry) libraries.push('geometry');
-      if(this.import_places) libraries.push('places');
-      if(libraries.length) params.libraries = libraries.join();
+      if(this.libraries && this.libraries.length) {
+         params.libraries = this.libraries.join();   
+      }
 
       if(this.import_marker_cluster) {
          $Scriptjs(GOOGLE_MAP.markerClustererPlus.src, () => {
@@ -137,21 +127,25 @@ export default {
          this.geocoder = new google.maps.Geocoder();
 
          let options = {
-            center: this.settings.center,
+            center: new google.maps.LatLng(this.settings.center.lat, this.settings.center.lng),
             zoom: this.settings.zoom,
             gestureHandling: this.settings.gestureHandling
          };
+
          if(this.settings.mapTypeId) options.mapTypeId = this.settings.mapTypeId;
+
+         let styles = this.styles && this.styles.length ? this.styles.slice(0) : [];
+         if(this.hide_business) {
+            styles.push({
+               featureType: 'poi.business',
+               stylers: [{ visibility: 'off' }]
+            })
+         }
+         if(styles.length) options.styles = styles;
 
          this.map = new google.maps.Map(document.getElementById(this.id), options);
 
-         if(this.styles.hide.length) {
-            this.map.setOptions({
-               styles: this.styles['hide']
-            });
-         }
-
-         if(this.import_places) {
+         if(this.hasLibrary('places')) {
             this.placesService = new google.maps.places.PlacesService(this.map);
          }
          
@@ -169,7 +163,12 @@ export default {
             });
          });
 
-         this.$emit('initialized');
+         this.$emit('initialized', this.map);
+      },
+      hasLibrary(name) {
+         if(this.libraries && this.libraries.length) {
+            return this.libraries.includes(name); 
+         }else return false;
       },
       setMarkerCluster(markers) {
          let markerCluster = new MarkerClusterer(this.map, markers, {

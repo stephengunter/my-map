@@ -50,6 +50,39 @@ const guestLinks = [{
       icon: '',
       title: 'Import'
    } 
+},{
+   name: 'visualizing',
+   path: '/visualizing',
+   view: 'Visualizing',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Visualizing'
+   } 
+},{
+   name: 'heat',
+   path: '/heat',
+   view: 'Heat',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Heat'
+   } 
+},{
+   name: 'combining',
+   path: '/combining',
+   view: 'Combining',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Combining'
+   } 
 }];
 
 let appRoutes = applinks.concat(userLinks).concat(guestLinks);
