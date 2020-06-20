@@ -115,7 +115,9 @@ export default {
 			}
 		},
 		showConfirm({type, title, text, ok ='確定', cancel = '取消', onOk = null, onCancel = null, maxWidth = 0 }) {
-			
+			console.log('maxWidth', maxWidth);
+			console.log('DIALOG_MAX_WIDTH', DIALOG_MAX_WIDTH);
+			console.log('contentMaxWidth', this.contentMaxWidth);
 			this.confirm = {
             type,
             title,

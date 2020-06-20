@@ -22,6 +22,13 @@ export const SET_ERROR = 'setError';
 export const CLEAR_ERROR = 'clearError';
 
 
-//Articles
-export const SET_ARTICLES = 'setArticles';
-export const SET_ARTICLE = 'setArticle';
+//SWCB
+export const SET_COUNTY = 'setCounty';
+export const SET_TOWN = 'setTown';
+export const SET_RED_ALERT = 'setRedAlert';
+export const SET_YELLO_ALERT = 'setYellowAlert';
+export const SET_ER_LOCATIONS = 'setERLocations';
+export const SET_DISASTERS = 'setDisasters';
+export const SET_DEBRIS = 'setDebris';
+export const SET_DEBRIS_AREAS = 'setDebrisAreas';
+export const SET_RAINS = 'setRains';

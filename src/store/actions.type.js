@@ -19,3 +19,15 @@ export const SCROLL_TOP = 'scrollTop';
 
 //Geos
 export const FETCH_CITY_GEO = 'fetchCityGeo';
+
+//CWB
+export const FETCH_CWB = 'fetchCWB';
+
+//SWCB
+export const SWCB_GET_LOCATION = 'swcbGetLocation';
+export const FETCH_TOWN_ALERT_INFO = 'fetchTownAlertInfo';
+export const FETCH_ER_LOCATIONS = 'fetchERLocations';
+export const FETCH_DISASTERS = 'fetchDisasters';
+export const FETCH_DEBRIS = 'fetchDebris';
+export const FETCH_DEBRIS_AREAS = 'fetchDebrisAreas';
+export const FETCH_RAINS = 'fetchRains';

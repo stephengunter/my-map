@@ -16,7 +16,7 @@ const getters = {
 
 const actions = {
    [FETCH_CITY_GEO](context, params) {
-      context.commit(SET_LOADING, true);
+      context.commit(SET_LOADING, { value: true, text: '' });
       return new Promise((resolve, reject) => {
          GeosService.fetch(params)
          .then(data => {
@@ -26,7 +26,7 @@ const actions = {
             reject(error);
          })
          .finally(() => { 
-            context.commit(SET_LOADING, false);
+            context.commit(SET_LOADING, { value: false });
          });
       });
    }

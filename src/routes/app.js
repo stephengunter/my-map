@@ -15,7 +15,18 @@ const applinks = [{
    } 
 }];
 
-const userLinks = [];
+const userLinks = [{
+   name: 'rain',
+   path: '/rain',
+   view: 'Rain',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Rain'
+   } 
+}];
 
 const guestLinks = [{
    name: 'test',
@@ -83,7 +94,53 @@ const guestLinks = [{
       icon: '',
       title: 'Combining'
    } 
+},{
+   name: 'geolocation',
+   path: '/geolocation',
+   view: 'Geolocation',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Geolocation'
+   } 
+},{
+   name: 'info',
+   path: '/info',
+   view: 'Info',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Info'
+   } 
+},{
+   name: 'counties',
+   path: '/counties',
+   view: 'Counties',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Counties'
+   } 
+},{
+   name: 'rain-heat',
+   path: '/rain-heat',
+   view: 'rain/Heat',
+   parent: '',
+   meta: {
+      type: FOR_ALL,
+      menus: [],
+      icon: '',
+      title: 'Rain Heat'
+   } 
 }];
+
+
 
 let appRoutes = applinks.concat(userLinks).concat(guestLinks);
 

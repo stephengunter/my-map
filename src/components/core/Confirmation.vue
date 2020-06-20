@@ -1,19 +1,24 @@
 <template>
    <v-card>
       <v-card-title v-if="type === 'error'" class="headline red lighten-1 pb-5">
-         <v-icon color="white" class="mr-3">
-            mdi-alert-circle
-         </v-icon>
-         <span style="color: #fff;">
-            {{ title  }}
-         </span>
+         <div style="display: flex;">
+            <v-icon color="white" class="mr-3">
+               mdi-alert-circle
+            </v-icon>
+            <span style="color: #fff;">
+               {{ title  }}
+            </span>
+         </div>
       </v-card-title>
-      <v-card-title v-else v-show="title">{{ title }}</v-card-title>
-         <slot>
-            <v-card-text v-if="text">
-            {{ text }}
-            </v-card-text>
-         </slot>
+      <v-card-title v-else v-show="title">
+         {{ title }}
+      </v-card-title>
+      <slot>
+         <v-card-text v-if="text">
+            <p class="mt-3"> {{ text }}</p>
+        
+         </v-card-text>
+      </slot>
       <v-card-actions v-show="hasAction">
          <v-spacer></v-spacer>
          <v-btn text @click="cancel">

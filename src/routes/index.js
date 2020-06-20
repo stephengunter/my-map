@@ -12,6 +12,7 @@ const mapRoute = (item) => {
 }
 
 
+
 const originalPush = Router.prototype.push;
 
 Router.prototype.push = function push(location, onResolve, onReject) {

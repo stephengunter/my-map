@@ -1,5 +1,5 @@
 <template>
-   <div :id="id" :style="containerStyle">
+   <div :id="id" style="width:100%; height:100%">
 
    </div>
 </template>
@@ -16,10 +16,6 @@ export default {
       id: {
          type: String,
          default: 'map'
-      },
-      height: {
-         type: Number,
-         default: 420
       },
       type: {
          type: String,
@@ -80,23 +76,20 @@ export default {
       }
    },
    computed: {
-      containerStyle() {
-         return {
-            width: '100%',
-            height: `${this.height}px`
-         }
-      }
+      
    },
    beforeMount() {
       
       if(this.center && this.center.length === 2) {
-         let lat = tryParseInt(this.center[0]);
-         let lng = tryParseInt(this.center[1]);
+         let lat = Number(this.center[0]);
+         let lng = Number(this.center[1]);
          if(isValidLatitude(lat) && isValidLongitude(lng)) {
             this.settings.center.lat = lat;
             this.settings.center.lng = lng;
          }
       }
+
+      console.log(this.settings.center);
 
       if(this.zoom) this.settings.zoom = this.zoom;
 
@@ -156,11 +149,11 @@ export default {
             this.lastLat = latLng.lat();
             this.lastLng = latLng.lng();
             
-            this.updateMarker(latLng);
+            // this.updateMarker(latLng);
 
-            this.geocoder.geocode({ 'location': latLng }, (results, status) => {
-               if(results) this.$emit('address', results);
-            });
+            // this.geocoder.geocode({ 'location': latLng }, (results, status) => {
+            //    if(results) this.$emit('address', results);
+            // });
          });
 
          this.$emit('initialized', this.map);

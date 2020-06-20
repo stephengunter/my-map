@@ -67,7 +67,7 @@ const getters = {
 
 const actions = {
    [INIT](context) {
-      context.commit(SET_LOADING, false);
+      context.commit(SET_LOADING, { value: false, text: ''});
       context.commit(CLEAR_ERROR);
       context.commit(SET_CURRENT_PAGE, null);
       context.commit(SET_BREAD_ITEMS, []);
@@ -108,9 +108,9 @@ const mutations = {
    [SET_BREAD_ITEMS](state, items) {
       state.breadItems = items;
    },
-   [SET_LOADING](state, loading, text = '') {
-      state.loading = loading;
-      if(loading) state.loadingText = text;
+   [SET_LOADING](state, {value, text = ''}) {
+      state.loading = value;
+      if(value) state.loadingText = text;
       else state.loadingText = '';
    },
    [SET_WINDOW_WIDTH](state, val) {
